@@ -1,8 +1,12 @@
+console.log(document.getElementById("cardTitle"));
+
 function novoGasto() {
   const card = document.getElementById("card");
   const novoGastoBtn = document.getElementById("novoGasto");
   novoGastoBtn.classList.add("oculto");
   card.classList.remove("oculto");
+
+  data.valueAsDate = new Date();
 }
 
 function cancelar() {
@@ -12,8 +16,11 @@ function cancelar() {
   novoGastoBtn.classList.remove("oculto");
 }
 
+let editandoId = null;
+
 class Gasto {
   constructor(nome, valor, categoria, data) {
+    this.id = Date.now();
     this.nome = nome;
     this.valor = valor;
     this.categoria = categoria;
@@ -30,8 +37,8 @@ class Gastos {
     this.lista.push(gasto);
   }
 
-  deletarGasto(index) {
-    this.lista.splice(index, 1);
+  deletarGasto(id) {
+    this.lista = this.lista.filter((gasto) => gasto.id !== id);
     atualizarStats();
     atualizarListaGastos();
   }
@@ -87,15 +94,46 @@ function adicionarGasto() {
     categoria.value,
     data.value,
   );
-  sistema.adicionarGasto(gasto);
+
+  if (editandoId !== null) {
+    const indexEditar = sistema.lista.findIndex(
+      (gasto) => gasto.id === editandoId,
+    );
+
+    sistema.lista[indexEditar] = {
+      ...sistema.lista[indexEditar],
+      nome: nome.value,
+      valor: parseFloat(valor.value),
+      categoria: categoria.value,
+      data: data.value,
+    };
+
+    editandoId = null;
+  } else {
+    sistema.adicionarGasto(gasto);
+  }
+
   nome.value = "";
   valor.value = "";
   categoria.value = "";
-  data.value = "";
 
   cancelar();
   atualizarStats();
   atualizarListaGastos();
+}
+
+function editarGasto(id) {
+  const gastoEditar = sistema.lista.find((gasto) => gasto.id === id);
+
+  document.getElementById("nome").value = gastoEditar.nome;
+  document.getElementById("valor").value = gastoEditar.valor;
+  document.getElementById("categoria").value = gastoEditar.categoria;
+  document.getElementById("data").value = gastoEditar.data;
+
+  editandoId = id;
+
+  document.getElementById("cardTitle").innerText = "✏️ Editar Gasto";
+  novoGasto();
 }
 
 const iconesPorCategoria = {
@@ -113,7 +151,7 @@ function atualizarListaGastos(lista = sistema.listarGastos()) {
   const listaGastos = document.getElementById("listaDeGastos");
   listaGastos.innerHTML = "";
 
-  lista.forEach((gasto, index) => {
+  lista.forEach((gasto) => {
     const icone = iconesPorCategoria[gasto.categoria];
     listaGastos.innerHTML += `
         <div class="expense-item">
@@ -127,8 +165,8 @@ function atualizarListaGastos(lista = sistema.listarGastos()) {
   </div>
   <div class="expense-value">R$ ${gasto.valor.toFixed(2).replace(".", ",")}</div>
   <div class="expense-actions">
-    <button class="icon-btn edit">✏️</button>
-    <button onclick="sistema.deletarGasto(${index})" class="icon-btn delete">🗑️</button>
+    <button onclick="editarGasto(${gasto.id})" class="icon-btn edit">✏️</button>
+    <button onclick="sistema.deletarGasto(${gasto.id})" class="icon-btn delete">🗑️</button>
   </div>
 </div>
         `;
