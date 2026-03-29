@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Gastos</title>
+    <link
+      href__="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header>
+      <div class="navbar-container">
+        <div class="navbar-brand">
+          <div class="navbar-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="white"
+            >
+              <path
+                d="M200-200v-560 560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v100h-80v-100H200v560h560v-100h80v100q0 33-23.5 56.5T760-120H200Zm320-160q-33 0-56.5-23.5T440-360v-240q0-33 23.5-56.5T520-680h280q33 0 56.5 23.5T880-600v240q0 33-23.5 56.5T800-280H520Zm280-80v-240H520v240h280Zm-117.5-77.5Q700-455 700-480t-17.5-42.5Q665-540 640-540t-42.5 17.5Q580-505 580-480t17.5 42.5Q615-420 640-420t42.5-17.5Z"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="navbar-title">Controle de Gastos</div>
+            <div class="navbar-subtitle">Gerencie suas finanças</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- STATS CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Total Gasto</span>
+            <div class="stat-icon green">📈</div>
+          </div>
+          <div class="stat-value" id="totalGasto">R$ 0,00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Este Mês</span>
+            <div class="stat-icon blue">📅</div>
+          </div>
+          <div class="stat-value" id="mesAtual">R$ 0,00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Registros</span>
+            <div class="stat-icon violet">🧾</div>
+          </div>
+          <div class="stat-value" id="totalRegistros">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Categorias</span>
+            <div class="stat-icon amber">🏷️</div>
+          </div>
+          <div class="stat-value" id="totalCategorias">0</div>
+        </div>
+      </div>
+
+      <!-- CONTENT GRID -->
+      <div class="content-grid">
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+          <div>
+            <button id="novoGasto" class="btn-primary" onclick="novoGasto()">
+              + Novo Gasto
+            </button>
+          </div>
+          <!-- FORM -->
+          <div id="card" class="card oculto">
+            <div class="card-title">+ Novo Gasto</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input
+                  type="text"
+                  id="nome"
+                  placeholder="Ex: Almoço, Uber..."
+                />
+                <div id="errorNome" class="error"></div>
+              </div>
+              <div class="form-group">
+                <label for="valor">Valor (R$)</label>
+                <input type="number" id="valor" placeholder="0,00" />
+                <div id="errorValor" class="error"></div>
+              </div>
+              <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select id="categoria">
+                  <option value="">Selecione...</option>
+                  <option value="alimentacao">🍔 Alimentação</option>
+                  <option value="transporte">🚗 Transporte</option>
+                  <option value="moradia">🏠 Moradia</option>
+                  <option value="saude">💊 Saúde</option>
+                  <option value="educacao">📚 Educação</option>
+                  <option value="lazer">🎮 Lazer</option>
+                  <option value="vestuario">👕 Vestuário</option>
+                  <option value="outros">📦 Outros</option>
+                </select>
+                <div id="errorCategoria" class="error"></div>
+              </div>
+              <div class="form-group">
+                <label for="data">Data</label>
+                <input type="date" id="data" />
+                <div id="errorData" class="error"></div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button onclick="adicionarGasto()" class="btn-primary">
+                Adicionar
+              </button>
+              <button onclick="cancelar()" class="btn-outline">Cancelar</button>
+            </div>
+          </div>
+
+          <!-- FILTER BAR -->
+          <div>
+            <div class="search-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+              <input
+                class="search-input"
+                type="text"
+                placeholder="Buscar gasto..."
+                id="pesquisa"
+              />
+            </div>
+            <div class="filter-chips">
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="gray"
+                >
+                  <path
+                    d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"
+                  /></svg
+              ></span>
+              <button class="chip active" id="filtroTodas">Todas</button>
+              <button class="chip orange" id="filtroAlimentacao">
+                🍔 Alimentação
+              </button>
+              <button class="chip blue" id="filtroTransporte">
+                🚗 Transporte
+              </button>
+              <button class="chip violet" id="filtroMoradia">🏠 Moradia</button>
+              <button class="chip red" id="filtroSaude">💊 Saúde</button>
+              <button class="chip cyan" id="filtroEducacao">📚 Educação</button>
+              <button class="chip yellow" id="filtroLazer">🎮 Lazer</button>
+              <button class="chip pink" id="filtroVestuario">
+                👕 Vestuário
+              </button>
+              <button class="chip gray" id="filtroOutros">📦 Outros</button>
+            </div>
+          </div>
+
+          <!-- EXPENSE LIST -->
+          <div>
+            <div class="section-title">Gastos</div>
+            <div id="listaDeGastos" class="expense-list"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+          <!-- CHART -->
+          <div class="card">
+            <div class="card-title">Gastos por Categoria</div>
+            <div class="card-subtitle">Distribuição dos seus gastos</div>
+            <div class="pie-placeholder">
+              <div class="pie-hole"></div>
+            </div>
+            <div class="chart-legend">
+              <span class="chip orange">🍔 Alimentação</span>
+              <span class="chip violet">🏠 Moradia</span>
+              <span class="chip blue">🚗 Transporte</span>
+              <span class="chip red">💊 Saúde</span>
+              <span class="chip cyan">📚 Educação</span>
+              <span class="chip yellow">🎮 Lazer</span>
+              <span class="chip pink">👕 Vestuário</span>
+            </div>
+          </div>
+
+          <!-- BREAKDOWN -->
+          <div class="card">
+            <div class="card-title">Detalhamento</div>
+            <div class="card-subtitle">Gastos por categoria</div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>🍔 Alimentação</span><span>R$ 366,40</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 34.5%; background: #f97316"
+                ></div>
+              </div>
+              <div class="breakdown-pct">34.5% do total</div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>🏠 Moradia</span><span>R$ 288,90</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 27.2%; background: #8b5cf6"
+                ></div>
+              </div>
+              <div class="breakdown-pct">27.2% do total</div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>🚗 Transporte</span><span>R$ 172,50</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 16.3%; background: #3b82f6"
+                ></div>
+              </div>
+              <div class="breakdown-pct">16.3% do total</div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>💊 Saúde</span><span>R$ 67,80</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 6.4%; background: #ef4444"
+                ></div>
+              </div>
+              <div class="breakdown-pct">6.4% do total</div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>📚 Educação</span><span>R$ 49,90</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 4.7%; background: #06b6d4"
+                ></div>
+              </div>
+              <div class="breakdown-pct">4.7% do total</div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>👕 Vestuário</span><span>R$ 79,90</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 7.5%; background: #ec4899"
+                ></div>
+              </div>
+              <div class="breakdown-pct">7.5% do total</div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>🎮 Lazer</span><span>R$ 35,00</span>
+              </div>
+              <div class="bar-track">
+                <div
+                  class="bar-fill"
+                  style="width: 3.3%; background: #eab308"
+                ></div>
+              </div>
+              <div class="breakdown-pct">3.3% do total</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
