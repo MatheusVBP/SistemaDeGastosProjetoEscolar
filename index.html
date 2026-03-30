@@ -42,28 +42,76 @@
         <div class="stat-card">
           <div class="stat-card-header">
             <span class="stat-label">Total Gasto</span>
-            <div class="stat-icon green">📈</div>
+            <div class="stat-icon green">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20px"
+                viewBox="0 -960 960 960"
+                width="20px"
+                fill="#059669"
+              >
+                <path
+                  d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z"
+                />
+              </svg>
+            </div>
           </div>
           <div class="stat-value" id="totalGasto">R$ 0,00</div>
         </div>
         <div class="stat-card">
           <div class="stat-card-header">
             <span class="stat-label">Este Mês</span>
-            <div class="stat-icon blue">📅</div>
+            <div class="stat-icon blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20px"
+                viewBox="0 -960 960 960"
+                width="20px"
+                fill="#2563eb"
+              >
+                <path
+                  d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-188.5-11.5Q280-423 280-440t11.5-28.5Q303-480 320-480t28.5 11.5Q360-457 360-440t-11.5 28.5Q337-400 320-400t-28.5-11.5ZM640-400q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-188.5-11.5Q280-263 280-280t11.5-28.5Q303-320 320-320t28.5 11.5Q360-297 360-280t-11.5 28.5Q337-240 320-240t-28.5-11.5ZM640-240q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"
+                />
+              </svg>
+            </div>
           </div>
           <div class="stat-value" id="mesAtual">R$ 0,00</div>
         </div>
         <div class="stat-card">
           <div class="stat-card-header">
             <span class="stat-label">Registros</span>
-            <div class="stat-icon violet">🧾</div>
+            <div class="stat-icon violet">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20px"
+                viewBox="0 -960 960 960"
+                width="20px"
+                fill="#7c3aed"
+              >
+                <path
+                  d="M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z"
+                />
+              </svg>
+            </div>
           </div>
           <div class="stat-value" id="totalRegistros">0</div>
         </div>
         <div class="stat-card">
           <div class="stat-card-header">
             <span class="stat-label">Categorias</span>
-            <div class="stat-icon amber">🏷️</div>
+            <div class="stat-icon amber">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20px"
+                viewBox="0 -960 960 960"
+                width="20px"
+                fill="#d97706"
+              >
+                <path
+                  d="M446-80q-15 0-30-6t-27-18L103-390q-12-12-17.5-26.5T80-446q0-15 5.5-30t17.5-27l352-353q11-11 26-17.5t31-6.5h287q33 0 56.5 23.5T879-800v287q0 16-6 30.5T856-457L503-104q-12 12-27 18t-30 6Zm0-80 353-354v-286H513L160-446l286 286Zm253-480q25 0 42.5-17.5T759-700q0-25-17.5-42.5T699-760q-25 0-42.5 17.5T639-700q0 25 17.5 42.5T699-640ZM480-480Z"
+                />
+              </svg>
+            </div>
           </div>
           <div class="stat-value" id="totalCategorias">0</div>
         </div>
@@ -118,7 +166,11 @@
               </div>
             </div>
             <div class="form-actions">
-              <button onclick="adicionarGasto()" class="btn-primary">
+              <button
+                onclick="adicionarGasto()"
+                id="btnAdicionar"
+                class="btn-primary"
+              >
                 Adicionar
               </button>
               <button onclick="cancelar()" class="btn-outline">Cancelar</button>
@@ -160,21 +212,37 @@
                     d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"
                   /></svg
               ></span>
-              <button class="chip active" id="filtroTodas">Todas</button>
-              <button class="chip orange" id="filtroAlimentacao">
+              <button class="chip ativo" id="filtroTodas" data-cor="todas">
+                Todas
+              </button>
+              <button
+                class="chip"
+                id="filtroAlimentacao"
+                data-cor="alimentacao"
+              >
                 🍔 Alimentação
               </button>
-              <button class="chip blue" id="filtroTransporte">
+              <button class="chip" id="filtroTransporte" data-cor="transporte">
                 🚗 Transporte
               </button>
-              <button class="chip violet" id="filtroMoradia">🏠 Moradia</button>
-              <button class="chip red" id="filtroSaude">💊 Saúde</button>
-              <button class="chip cyan" id="filtroEducacao">📚 Educação</button>
-              <button class="chip yellow" id="filtroLazer">🎮 Lazer</button>
-              <button class="chip pink" id="filtroVestuario">
+              <button class="chip" id="filtroMoradia" data-cor="moradia">
+                🏠 Moradia
+              </button>
+              <button class="chip" id="filtroSaude" data-cor="saude">
+                💊 Saúde
+              </button>
+              <button class="chip" id="filtroEducacao" data-cor="educacao">
+                📚 Educação
+              </button>
+              <button class="chip" id="filtroLazer" data-cor="lazer">
+                🎮 Lazer
+              </button>
+              <button class="chip" id="filtroVestuario" data-cor="vestuario">
                 👕 Vestuário
               </button>
-              <button class="chip gray" id="filtroOutros">📦 Outros</button>
+              <button class="chip" id="filtroOutros" data-cor="outros">
+                📦 Outros
+              </button>
             </div>
           </div>
 
@@ -192,40 +260,14 @@
             <div class="card-title">Gastos por Categoria</div>
             <div class="card-subtitle">Distribuição dos seus gastos</div>
             <div class="pie-placeholder">
-              <div class="pie-hole"></div>
-            </div>
-            <div class="chart-legend">
-              <span class="chip orange">🍔 Alimentação</span>
-              <span class="chip violet">🏠 Moradia</span>
-              <span class="chip blue">🚗 Transporte</span>
-              <span class="chip red">💊 Saúde</span>
-              <span class="chip cyan">📚 Educação</span>
-              <span class="chip yellow">🎮 Lazer</span>
-              <span class="chip pink">👕 Vestuário</span>
-            </div>
-          </div>
-
-          <!-- BREAKDOWN -->
-          <div class="card">
-            <div class="card-title">Detalhamento</div>
-            <div class="card-subtitle">Gastos por categoria</div>
-
-            <div class="breakdown-item">
-              <div class="breakdown-header">
-                <span>🍔 Alimentação</span><span>R$ 366,40</span>
-              </div>
-              <div class="bar-track">
-                <div
-                  class="bar-fill"
-                  style="width: 34.5%; background: #f97316"
-                ></div>
-              </div>
-              <div class="breakdown-pct">34.5% do total</div>
+              <canvas id="graficoGastos"></canvas>
+              <div id="semLista" class="semListaDiv"></div>
             </div>
           </div>
         </div>
       </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
